@@ -1,0 +1,19 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Backup files
+*.backup
+
+# Temporary files
+*.tmp
+*.log
+
+# Resume files (optional - remove if you want to include)
+# 实习简历.docx
+# 实习简历.pdf
+# 简历_page_1.png

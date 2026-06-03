@@ -1,0 +1,1326 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张祥超 | 嵌入式硬件工程师</title>
+    <meta name="description" content="张祥超 - 嵌入式硬件工程师，成都信息工程大学硕士研究生，专注于GD32嵌入式系统开发，精通原理图设计、PCB布局布线、硬件调试，研究生电子设计竞赛国家三等奖获奖者">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== CSS Variables ==================== */
+        :root {
+            /* Linear-inspired dark palette */
+            --canvas: #010102;
+            --surface-1: #0f1011;
+            --surface-2: #141516;
+            --surface-3: #18191a;
+            --surface-4: #191a1b;
+            --hairline: #23252a;
+            --hairline-strong: #34343a;
+
+            /* Text colors */
+            --ink: #f7f8f8;
+            --ink-muted: #d0d6e0;
+            --ink-subtle: #8a8f98;
+            --ink-tertiary: #62666d;
+
+            /* Accent - Linear lavender-blue */
+            --primary: #5e6ad2;
+            --primary-hover: #828fff;
+            --primary-focus: #5e69d1;
+            --on-primary: #ffffff;
+
+            /* Semantic */
+            --success: #27a644;
+            --gradient-1: linear-gradient(135deg, #5e6ad2 0%, #828fff 100%);
+            --gradient-2: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            /* Typography */
+            --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+            /* Spacing */
+            --section-padding: 120px;
+            --container-max: 1200px;
+        }
+
+        /* ==================== Reset & Base ==================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--canvas);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ==================== Typography ==================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .display-xl {
+            font-size: clamp(48px, 8vw, 96px);
+            letter-spacing: -0.04em;
+        }
+
+        .display-lg {
+            font-size: clamp(36px, 5vw, 64px);
+            letter-spacing: -0.03em;
+        }
+
+        .display-md {
+            font-size: clamp(28px, 4vw, 48px);
+            letter-spacing: -0.02em;
+        }
+
+        .headline {
+            font-size: clamp(22px, 3vw, 32px);
+            font-weight: 500;
+        }
+
+        .body-lg {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .body {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .body-sm {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .caption {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-subtle);
+        }
+
+        /* ==================== Layout ==================== */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        section {
+            padding: var(--section-padding) 0;
+            position: relative;
+        }
+
+        /* ==================== Navigation ==================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: rgba(1, 1, 2, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(35, 37, 42, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 12px 0;
+            background: rgba(1, 1, 2, 0.95);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .lang-toggle {
+            background: var(--surface-2);
+            color: var(--ink-muted);
+            border: 1px solid var(--hairline);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-toggle:hover {
+            background: var(--primary);
+            color: var(--on-primary);
+            border-color: var(--primary);
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ==================== Hero Section ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(94, 106, 210, 0.08) 0%, transparent 70%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 5%) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--surface-2);
+            border: 1px solid var(--hairline);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-muted);
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-label .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-title {
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            max-width: 600px;
+            color: var(--ink-muted);
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== Buttons ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--on-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(94, 106, 210, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--surface-2);
+            color: var(--ink);
+            border: 1px solid var(--hairline);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-3);
+            border-color: var(--hairline-strong);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== Stats Section ==================== */
+        .stats {
+            padding: 80px 0;
+            border-top: 1px solid var(--hairline);
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .stat-number .accent {
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--ink-subtle);
+            font-weight: 500;
+        }
+
+        /* ==================== About Section ==================== */
+        .about {
+            background: var(--surface-1);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: var(--surface-3);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--hairline);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 106, 210, 0.2) 0%, transparent 50%);
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            opacity: 0.3;
+        }
+
+        .about-content .section-label {
+            margin-bottom: 16px;
+        }
+
+        .about-content .section-title {
+            margin-bottom: 24px;
+        }
+
+        .about-content .body {
+            color: var(--ink-muted);
+            margin-bottom: 32px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            padding: 8px 16px;
+            background: var(--surface-3);
+            border: 1px solid var(--hairline);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-muted);
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: var(--on-primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== Projects Section ==================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .project-card {
+            background: var(--surface-2);
+            border: 1px solid var(--hairline);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-image {
+            aspect-ratio: 16/10;
+            background: var(--surface-3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, var(--surface-2));
+        }
+
+        .project-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            opacity: 0.2;
+        }
+
+        .project-content {
+            padding: 32px;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .project-year {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary);
+            padding: 4px 10px;
+            background: rgba(94, 106, 210, 0.1);
+            border-radius: 4px;
+        }
+
+        .project-type {
+            font-size: 13px;
+            color: var(--ink-subtle);
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .project-description {
+            color: var(--ink-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 6px 12px;
+            background: var(--surface-4);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink-subtle);
+        }
+
+        /* ==================== Experience Section ==================== */
+        .experience {
+            background: var(--surface-1);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 64px auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--hairline));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 48px;
+            padding-bottom: 48px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background: var(--canvas);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            background: var(--primary);
+            box-shadow: 0 0 16px rgba(94, 106, 210, 0.5);
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            color: var(--ink-muted);
+            margin-bottom: 16px;
+        }
+
+        .timeline-description {
+            color: var(--ink-subtle);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* ==================== Contact Section ==================== */
+        .contact {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(94, 106, 210, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact .section-label {
+            margin-bottom: 16px;
+        }
+
+        .contact .section-title {
+            margin-bottom: 24px;
+        }
+
+        .contact .body {
+            color: var(--ink-muted);
+            margin-bottom: 48px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--surface-2);
+            border: 1px solid var(--hairline);
+            border-radius: 12px;
+            color: var(--ink-muted);
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--on-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(94, 106, 210, 0.3);
+        }
+
+        /* ==================== Footer ==================== */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--hairline);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--ink-subtle);
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* ==================== Animations ==================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== Responsive ==================== */
+        @media (max-width: 1024px) {
+            :root {
+                --section-padding: 80px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 64px;
+            }
+
+            .container {
+                padding: 0 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+
+            .contact-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* ==================== Custom Cursor ==================== */
+        @media (hover: hover) {
+            .cursor-dot {
+                position: fixed;
+                width: 8px;
+                height: 8px;
+                background: var(--primary);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s ease;
+                mix-blend-mode: difference;
+            }
+
+            .cursor-ring {
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                border: 2px solid rgba(94, 106, 210, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transition: all 0.15s ease;
+                mix-blend-mode: difference;
+            }
+        }
+
+        /* ==================== Noise Texture ==================== */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('data:image/svg+xml,%3Csvg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.03"/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.5;
+        }
+
+        /* ==================== Scroll Progress ==================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">Port<span>folio</span></a>
+            <ul class="nav-links">
+                <li><a href="#about" data-zh="关于" data-en="About">关于</a></li>
+                <li><a href="#projects" data-zh="项目" data-en="Projects">项目</a></li>
+                <li><a href="#experience" data-zh="经历" data-en="Experience">经历</a></li>
+                <li><a href="#contact" data-zh="联系" data-en="Contact">联系</a></li>
+                <li><button class="lang-toggle" id="langToggle" onclick="toggleLanguage()">EN</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container hero-content">
+            <div class="hero-label">
+                <span class="dot"></span>
+                <span data-zh="可实习 · 寻求合作机会" data-en="Open to Internship · Seeking Cooperation">可实习 · 寻求合作机会</span>
+            </div>
+            <h1 class="hero-title display-xl">
+                <span data-zh="嵌入式" data-en="Embedded">嵌入式</span><span class="gradient-text" data-zh="硬件" data-en="Hardware">硬件</span><br>
+                <span data-zh="设计工程师" data-en="Design Engineer">设计工程师</span>
+            </h1>
+            <p class="hero-subtitle body-lg" data-zh="专注于嵌入式硬件系统设计，精通原理图与PCB设计、嵌入式固件开发、信号采集与处理。两次研电赛参赛经历，获国家三等奖。" data-en="Focused on embedded hardware system design, proficient in schematic and PCB design, embedded firmware development, signal acquisition and processing. Two EDC competition experiences, won national third prize.">
+                专注于嵌入式硬件系统设计，精通原理图与PCB设计、嵌入式固件开发、信号采集与处理。两次研电赛参赛经历，获国家三等奖。
+            </p>
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">
+                    <span data-zh="查看作品" data-en="View Projects">查看作品</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="#contact" class="btn btn-secondary" data-zh="联系方式" data-en="Contact">联系方式</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number">2<span class="accent" data-zh="届" data-en="Times">届</span></div>
+                    <div class="stat-label" data-zh="研电赛参赛" data-en="EDC Competitions">研电赛参赛</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">1<span class="accent" data-zh="项" data-en="Award">项</span></div>
+                    <div class="stat-label" data-zh="国家三等奖" data-en="National 3rd Prize">国家三等奖</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">2<span class="accent" data-zh="年" data-en="Years">年</span></div>
+                    <div class="stat-label" data-zh="嵌入式开发经验" data-en="Embedded Dev Experience">嵌入式开发经验</div>
+                </div>
+                <div class="stat-item fade-in">
+                    <div class="stat-number">81<span class="accent" data-zh="分" data-en="Points">分</span></div>
+                    <div class="stat-label" data-zh="考研英语成绩" data-en="Postgrad English Score">考研英语成绩</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <div class="about-image-placeholder">👨‍💻</div>
+                </div>
+                <div class="about-content">
+                    <p class="caption section-label fade-in" data-zh="关于我" data-en="About Me">关于我</p>
+                    <h2 class="display-md section-title fade-in">
+                        <span data-zh="专注硬件设计的" data-en="Focused on Hardware">专注硬件设计的</span><br>
+                        <span data-zh="嵌入式工程师" data-en="Embedded Engineer">嵌入式工程师</span>
+                    </h2>
+                    <p class="body fade-in" data-zh="本人具备扎实的电子信息专业知识和工程实践能力，能独立完成从原理图设计、元件选型到PCB布局布线的全流程硬件设计，并通过优化布局实现成本控制。擅长硬件调试与焊接，故障排查效率高。" data-en="I have solid electronic information professional knowledge and engineering practice ability, can independently complete the whole process hardware design from schematic design, component selection to PCB layout and wiring, and achieve cost control through optimized layout. Good at hardware debugging and welding, high efficiency in troubleshooting.">
+                        本人具备扎实的电子信息专业知识和工程实践能力，能独立完成从原理图设计、元件选型到PCB布局布线的全流程硬件设计，并通过优化布局实现成本控制。擅长硬件调试与焊接，故障排查效率高。
+                    </p>
+                    <p class="body fade-in" style="margin-bottom: 32px;" data-zh="熟悉嵌入式开发及Python/Matlab数据仿真分析，注重细节，善于解决实际问题。具备良好的学习能力和团队协作精神。" data-en="Familiar with embedded development and Python/Matlab data simulation analysis, pay attention to details, good at solving practical problems. Have good learning ability and team cooperation spirit.">
+                        熟悉嵌入式开发及Python/Matlab数据仿真分析，注重细节，善于解决实际问题。具备良好的学习能力和团队协作精神。
+                    </p>
+                    <div class="skills-list fade-in">
+                        <span class="skill-tag" data-zh="原理图设计" data-en="Schematic Design">原理图设计</span>
+                        <span class="skill-tag" data-zh="PCB布局布线" data-en="PCB Layout">PCB布局布线</span>
+                        <span class="skill-tag" data-zh="GD32/STM32" data-en="GD32/STM32">GD32/STM32</span>
+                        <span class="skill-tag" data-zh="嘉立创EDA" data-en="JLCEDA">嘉立创EDA</span>
+                        <span class="skill-tag" data-zh="C语言" data-en="C Language">C语言</span>
+                        <span class="skill-tag" data-zh="Python" data-en="Python">Python</span>
+                        <span class="skill-tag" data-zh="MATLAB" data-en="MATLAB">MATLAB</span>
+                        <span class="skill-tag" data-zh="SPI/I2C通信" data-en="SPI/I2C Communication">SPI/I2C通信</span>
+                        <span class="skill-tag" data-zh="硬件调试" data-en="Hardware Debugging">硬件调试</span>
+                        <span class="skill-tag" data-zh="PCB焊接" data-en="PCB Soldering">PCB焊接</span>
+                        <span class="skill-tag" data-zh="信号采集" data-en="Signal Acquisition">信号采集</span>
+                        <span class="skill-tag" data-zh="Keil/STM32CubeMX" data-en="Keil/STM32CubeMX">Keil/STM32CubeMX</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <p class="caption section-label fade-in" data-zh="精选项目" data-en="Selected Projects">精选项目</p>
+            <h2 class="display-md section-title fade-in" data-zh="研电赛参赛项目" data-en="EDC Competition Projects">
+                研电赛参赛项目
+            </h2>
+            <p class="body fade-in" style="max-width: 600px; color: var(--ink-muted); margin-top: 16px;" data-zh="每个项目都代表了技术深度与创新设计的结合，展现了从概念到实现的完整能力。" data-en="Each project represents the combination of technical depth and innovative design, demonstrating the complete ability from concept to implementation.">
+                每个项目都代表了技术深度与创新设计的结合，展现了从概念到实现的完整能力。
+            </p>
+
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">🩸</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type" data-zh="兆易创新全开放命题 · 国家三等奖" data-en="GigaDevice Open Topic · National 3rd Prize">兆易创新全开放命题 · 国家三等奖</span>
+                        </div>
+                        <h3 class="project-title" data-zh="无创血糖检测轻量化设备（第二十一届研电赛）" data-en="Non-invasive Blood Glucose Detection Device (21st EDC)">无创血糖检测轻量化设备（第二十一届研电赛）</h3>
+                        <p class="project-description" data-zh="主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成系统硬件架构设计、双传感器（MAX30102 PPG + ADS1292 ECG）采集系统的原理图设计和PCB布局布线。" data-en="Led the design of a lightweight non-invasive blood glucose detection device based on GD32F303, achieving synchronous PPG and ECG signal acquisition. Independently completed system hardware architecture design, dual-sensor (MAX30102 PPG + ADS1292 ECG) acquisition system schematic design and PCB layout.">
+                            主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成系统硬件架构设计、双传感器（MAX30102 PPG + ADS1292 ECG）采集系统的原理图设计和PCB布局布线。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GD32F303</span>
+                            <span class="tech-tag">MAX30102</span>
+                            <span class="tech-tag">ADS1292</span>
+                            <span class="tech-tag">SPI/I2C</span>
+                            <span class="tech-tag" data-zh="PCB设计" data-en="PCB Design">PCB设计</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">📱</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-year">2024</span>
+                            <span class="project-type" data-zh="小米手环企业命题 · 硬件设计" data-en="Mi Band Enterprise Topic · Hardware Design">小米手环企业命题 · 硬件设计</span>
+                        </div>
+                        <h3 class="project-title" data-zh="小米手环硬件设计（第二十届研电赛）" data-en="Mi Band Hardware Design (20th EDC)">小米手环硬件设计（第二十届研电赛）</h3>
+                        <p class="project-description" data-zh="研究生电子设计竞赛"小米手环"企业命题参赛项目。独立完成原理图与PCB设计，掌握从原理图设计、元件选型到PCB布局布线的全流程硬件设计能力。" data-en="Postgraduate Electronic Design Contest 'Mi Band' enterprise topic competition project. Independently completed schematic and PCB design, mastered the whole process hardware design ability from schematic design, component selection to PCB layout.">
+                            研究生电子设计竞赛"小米手环"企业命题参赛项目。独立完成原理图与PCB设计，掌握从原理图设计、元件选型到PCB布局布线的全流程硬件设计能力。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag" data-zh="原理图设计" data-en="Schematic Design">原理图设计</span>
+                            <span class="tech-tag" data-zh="PCB设计" data-en="PCB Design">PCB设计</span>
+                            <span class="tech-tag" data-zh="嘉立创EDA" data-en="JLCEDA">嘉立创EDA</span>
+                            <span class="tech-tag" data-zh="信号完整性" data-en="Signal Integrity">信号完整性</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">⚡</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type" data-zh="嵌入式系统 · 信号处理" data-en="Embedded System · Signal Processing">嵌入式系统 · 信号处理</span>
+                        </div>
+                        <h3 class="project-title" data-zh="PPG/ECG信号同步采集系统" data-en="PPG/ECG Synchronous Acquisition System">PPG/ECG信号同步采集系统</h3>
+                        <p class="project-description" data-zh="基于GD32F303 MCU的双传感器采集系统，通过3.3V统一供电，为ADS1292的MISO开漏输出配置4.7kΩ上拉电阻，合理分配GPIO资源，实现高速SPI和I2C双总线通信。解决MISO缺上拉、PA6引脚短路等硬件故障，系统连续运行24小时无异常。" data-en="Dual-sensor acquisition system based on GD32F303 MCU, with 3.3V unified power supply, 4.7kΩ pull-up resistor configured for ADS1292 MISO open-drain output, reasonable GPIO resource allocation, achieving high-speed SPI and I2C dual-bus communication. Solved hardware faults such as MISO missing pull-up and PA6 pin short circuit, system ran continuously for 24 hours without abnormality.">
+                            基于GD32F303 MCU的双传感器采集系统，通过3.3V统一供电，为ADS1292的MISO开漏输出配置4.7kΩ上拉电阻，合理分配GPIO资源，实现高速SPI和I2C双总线通信。解决MISO缺上拉、PA6引脚短路等硬件故障，系统连续运行24小时无异常。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GD32F303</span>
+                            <span class="tech-tag" data-zh="SPI通信" data-en="SPI Communication">SPI通信</span>
+                            <span class="tech-tag" data-zh="I2C通信" data-en="I2C Communication">I2C通信</span>
+                            <span class="tech-tag" data-zh="故障排查" data-en="Troubleshooting">故障排查</span>
+                            <span class="tech-tag" data-zh="硬件焊接" data-en="Hardware Soldering">硬件焊接</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">🎨</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">
+                            <span class="project-year">2025</span>
+                            <span class="project-type" data-zh="上位机 · 数据处理" data-en="Host Software · Data Processing">上位机 · 数据处理</span>
+                        </div>
+                        <h3 class="project-title" data-zh="PPG信号采集与血糖预测系统" data-en="PPG Signal Acquisition & Blood Glucose Prediction System">PPG信号采集与血糖预测系统</h3>
+                        <p class="project-description" data-zh="完整的PPG信号采集上位机与基于ResNet深度学习的无创血糖预测系统。支持实时波形显示、信号滤波、特征提取，结合Python与MATLAB进行数据仿真分析。" data-en="Complete PPG signal acquisition host software and non-invasive blood glucose prediction system based on ResNet deep learning. Supports real-time waveform display, signal filtering, feature extraction, combined with Python and MATLAB for data simulation analysis.">
+                            完整的PPG信号采集上位机与基于ResNet深度学习的无创血糖预测系统。支持实时波形显示、信号滤波、特征提取，结合Python与MATLAB进行数据仿真分析。
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">MATLAB</span>
+                            <span class="tech-tag">ResNet</span>
+                            <span class="tech-tag">PyQt</span>
+                            <span class="tech-tag" data-zh="数据可视化" data-en="Data Visualization">数据可视化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <p class="caption section-label fade-in" data-zh="工作经历" data-en="Experience">工作经历</p>
+            <h2 class="display-md section-title fade-in" data-zh="专业成长轨迹" data-en="Professional Growth">
+                专业成长轨迹
+            </h2>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024 - <span data-zh="至今" data-en="Present">至今</span></div>
+                    <h3 class="timeline-title" data-zh="硕士研究生在读" data-en="Master's Student">硕士研究生在读</h3>
+                    <p class="timeline-company" data-zh="成都信息工程大学 · 新一代电子信息专业" data-en="Chengdu University of Information Technology · New Generation Electronic Information">成都信息工程大学 · 新一代电子信息专业</p>
+                    <p class="timeline-description" data-zh="专注于嵌入式系统与深度学习的交叉研究，主导设计基于GD32的无创血糖检测轻量化设备。两次参加中国研究生电子设计竞赛，获第二十一届研电赛国家三等奖。获二等学业奖学金。" data-en="Focused on cross-research of embedded systems and deep learning, led the design of a lightweight non-invasive blood glucose detection device based on GD32. Participated in China Postgraduate Electronic Design Contest twice, won the national third prize in the 21st EDC. Received second-class academic scholarship.">
+                        专注于嵌入式系统与深度学习的交叉研究，主导设计基于GD32的无创血糖检测轻量化设备。两次参加中国研究生电子设计竞赛，获第二十一届研电赛国家三等奖。获二等学业奖学金。
+                    </p>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025</div>
+                    <h3 class="timeline-title" data-zh="第二十一届研电赛 · 国家三等奖" data-en="21st EDC · National 3rd Prize">第二十一届研电赛 · 国家三等奖</h3>
+                    <p class="timeline-company" data-zh="兆易创新全开放命题" data-en="GigaDevice Open Topic">兆易创新全开放命题</p>
+                    <p class="timeline-description" data-zh="主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成从原理图设计、元件选型到PCB布局布线的全流程硬件设计，解决多个关键硬件故障。" data-en="Led the design of a lightweight non-invasive blood glucose detection device based on GD32F303, achieving synchronous PPG and ECG signal acquisition. Independently completed the whole process hardware design from schematic design, component selection to PCB layout, solving multiple key hardware faults.">
+                        主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成从原理图设计、元件选型到PCB布局布线的全流程硬件设计，解决多个关键硬件故障。
+                    </p>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2020 - 2024</div>
+                    <h3 class="timeline-title" data-zh="本科学习" data-en="Undergraduate Studies">本科学习</h3>
+                    <p class="timeline-company" data-zh="成都信息工程大学 · 电子信息工程专业" data-en="Chengdu University of Information Technology · Electronic Information Engineering">成都信息工程大学 · 电子信息工程专业</p>
+                    <p class="timeline-description" data-zh="打下坚实的电子工程基础，获校优秀毕业生、校优秀学生干部、二等学业奖学金。考研英语二81分，考入本校新一代电子信息专业攻读硕士学位。" data-en="Laid a solid foundation in electronic engineering, received Outstanding Graduate, Outstanding Student Leader, and second-class academic scholarship. Scored 81 in postgraduate English exam, admitted to the university's New Generation Electronic Information program for master's degree.">
+                        打下坚实的电子工程基础，获校优秀毕业生、校优秀学生干部、二等学业奖学金。考研英语二81分，考入本校新一代电子信息专业攻读硕士学位。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container contact-content">
+            <p class="caption section-label fade-in" data-zh="联系方式" data-en="Contact">联系方式</p>
+            <h2 class="display-md section-title fade-in" data-zh="联系我" data-en="Contact Me">
+                联系我
+            </h2>
+            <p class="body fade-in" data-zh="无论是实习机会、技术咨询还是学术交流，都欢迎随时联系我。" data-en="Whether it's internship opportunities, technical consultation or academic exchange, welcome to contact me at any time.">
+                无论是实习机会、技术咨询还是学术交流，都欢迎随时联系我。
+            </p>
+            <p class="body fade-in" style="margin-bottom: 32px;"><span data-zh="电话" data-en="Phone">电话</span>：18439230758 | <span data-zh="邮箱" data-en="Email">邮箱</span>：18439230758@163.com | <span data-zh="现居住地" data-en="Location">现居住地</span>：<span data-zh="成都市双流区" data-en="Shuangliu, Chengdu">成都市双流区</span></p>
+            <a href="mailto:18439230758@163.com" class="btn btn-primary fade-in">
+                <span data-zh="发送邮件" data-en="Send Email">发送邮件</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+            <div class="contact-links fade-in">
+                <a href="#" class="contact-link" title="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="#" class="contact-link" title="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="#" class="contact-link" title="微信">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.045c.134 0 .24-.11.24-.245 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 01-.023-.156.49.49 0 01.201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zm-2.18 2.769c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982z"/>
+                    </svg>
+                </a>
+                <a href="#" class="contact-link" title="Email">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M22 4L12 13L2 4"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © 2026 <span data-zh="张祥超" data-en="Zhang Xiangchao">张祥超</span> · <span data-zh="个人作品集" data-en="Personal Portfolio">个人作品集</span>. <span data-zh="使用" data-en="Crafted with">Crafted with</span> ❤️ <span data-zh="使用" data-en="using">using</span> <a href="#">Claude Code</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ==================== Language Switch ====================
+        let currentLang = localStorage.getItem('lang') || 'zh';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const elements = document.querySelectorAll('[data-zh][data-en]');
+            elements.forEach(el => {
+                el.textContent = currentLang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+            });
+
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle) {
+                langToggle.textContent = currentLang === 'zh' ? 'EN' : '中';
+            }
+
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+        }
+
+        // Apply language on page load
+        document.addEventListener('DOMContentLoaded', applyLanguage);
+
+        // ==================== Scroll Progress ====================
+        const scrollProgress = document.getElementById('scrollProgress');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // ==================== Navbar Scroll Effect ====================
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ==================== Custom Cursor ====================
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+
+        if (window.matchMedia('(hover: hover)').matches) {
+            let mouseX = 0, mouseY = 0;
+            let ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                cursorDot.style.left = mouseX - 4 + 'px';
+                cursorDot.style.top = mouseY - 4 + 'px';
+            });
+
+            function animateRing() {
+                ringX += (mouseX - ringX) * 0.15;
+                ringY += (mouseY - ringY) * 0.15;
+
+                cursorRing.style.left = ringX - 20 + 'px';
+                cursorRing.style.top = ringY - 20 + 'px';
+
+                requestAnimationFrame(animateRing);
+            }
+
+            animateRing();
+
+            // Cursor hover effects
+            const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-tag, .contact-link');
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorRing.style.transform = 'scale(1.5)';
+                    cursorRing.style.borderColor = 'rgba(94, 106, 210, 0.8)';
+                    cursorDot.style.transform = 'scale(1.5)';
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    cursorRing.style.transform = 'scale(1)';
+                    cursorRing.style.borderColor = 'rgba(94, 106, 210, 0.5)';
+                    cursorDot.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // ==================== Scroll Animations ====================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==================== Smooth Scroll ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ==================== Parallax Effect ====================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const hero = document.querySelector('.hero');
+
+            if (scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+            }
+        });
+
+        // ==================== Typing Effect (Optional Enhancement) ====================
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) {
+            const text = heroTitle.innerHTML;
+            // Already handled by CSS animations
+        }
+
+        console.log('🚀 Portfolio loaded successfully!');
+    </script>
+</body>
+</html>
