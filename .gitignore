@@ -13,7 +13,13 @@ Desktop.ini
 *.tmp
 *.log
 
-# Resume files (optional - remove if you want to include)
-# 实习简历.docx
-# 实习简历.pdf
-# 简历_page_1.png
+# PDF files (large, not needed for website)
+*.pdf
+
+# Resume files (personal documents)
+实习简历.docx
+实习简历.pdf
+简历_page_1.png
+
+# Circuit lab guides (not part of website)
+电路分析基础实验指导书*.pdf

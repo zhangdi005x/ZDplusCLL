@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>张祥超 | 嵌入式硬件工程师</title>
+    <title>张祥超 | 嵌入式硬件工程师 - Motion Edition</title>
     <meta name="description" content="张祥超 - 嵌入式硬件工程师，成都信息工程大学硕士研究生，专注于GD32嵌入式系统开发，精通原理图设计、PCB布局布线、硬件调试，研究生电子设计竞赛国家三等奖获奖者">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
     <style>
         /* ==================== CSS Variables ==================== */
         :root {
@@ -486,6 +491,8 @@
             overflow: hidden;
             transition: all 0.3s ease;
             position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
         }
 
         .project-card:hover {
@@ -743,9 +750,7 @@
 
         /* ==================== Animations ==================== */
         .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            /* GSAP handles animations, so we don't need default hidden state */
         }
 
         .fade-in.visible {
@@ -1340,9 +1345,379 @@
                 height: 260px;
             }
         }
+
+        /* ==================== Motion Effects ==================== */
+
+        /* Particle Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        /* Text Reveal Animation */
+        .text-reveal {
+            overflow: hidden;
+        }
+
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .text-reveal.visible span {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Stagger Animation */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .tilt-card:hover {
+            transform: rotateY(5deg) rotateX(5deg) scale(1.02);
+        }
+
+        /* Gradient Border Animation */
+        .gradient-border {
+            position: relative;
+            background: var(--surface-2);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #5e6ad2, #828fff, #667eea, #764ba2);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            border-radius: 16px;
+            animation: gradientRotate 3s linear infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Scale In Animation */
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Slide In Animations */
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide-left.visible,
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Blur In Animation */
+        .blur-in {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .blur-in.visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        /* Morphing Background */
+        .morph-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: morph 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 50% 50% 50% 50%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 50% 30% 50% 30%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                border-radius: 30% 50% 30% 50%;
+                transform: rotate(180deg) scale(1);
+            }
+            75% {
+                border-radius: 50% 50% 30% 30%;
+                transform: rotate(270deg) scale(1.1);
+            }
+        }
+
+        /* Smooth Counter */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .glitch:hover::before {
+            animation: glitch1 0.3s linear;
+            color: #828fff;
+            opacity: 0.8;
+        }
+
+        .glitch:hover::after {
+            animation: glitch2 0.3s linear;
+            color: #667eea;
+            opacity: 0.8;
+        }
+
+        @keyframes glitch1 {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(3px, -3px); }
+            60% { transform: translate(-3px, -3px); }
+            80% { transform: translate(3px, 3px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitch2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(3px, -3px); }
+            40% { transform: translate(-3px, 3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(-3px, -3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Smooth Section Transitions */
+        section {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Enhanced Hover Cards */
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 32px 64px rgba(94, 106, 210, 0.2);
+        }
+
+        /* Animated Gradient Text */
+        .animated-gradient-text {
+            background: linear-gradient(135deg, #5e6ad2, #828fff, #667eea, #764ba2, #5e6ad2);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Line Draw Animation */
+        .line-draw {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s ease;
+        }
+
+        .line-draw.visible {
+            stroke-dashoffset: 0;
+        }
+
+        /* Enhanced Loading Screen */
+        .loading-screen {
+            background: linear-gradient(135deg, #010102 0%, #0a0a1a 100%);
+        }
+
+        .loader-logo {
+            animation: loaderPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes loaderPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Smooth Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+        }
+
+        .scroll-mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid var(--ink-muted);
+            border-radius: 13px;
+            position: relative;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation: scrollWheel 2s ease infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+        }
+
+        /* Page Transition */
+        .page-transition {
+            position: fixed;
+            inset: 0;
+            background: var(--primary);
+            z-index: 10001;
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+
+        /* Enhanced Stats Counter */
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.6s ease;
+        }
+
+        .stat-item:hover::after {
+            width: 60%;
+        }
+
+        /* Smooth Project Card Hover */
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <canvas id="particleCanvas"></canvas>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader">
@@ -1355,6 +1730,11 @@
 
     <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <div class="scroll-mouse"></div>
+    </div>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
@@ -1434,20 +1814,20 @@
                 <span data-zh="可实习 · 寻求合作机会" data-en="Open to Internship · Seeking Cooperation">可实习 · 寻求合作机会</span>
             </div>
             <h1 class="hero-title display-xl">
-                <span data-zh="嵌入式" data-en="Embedded">嵌入式</span><span class="gradient-text" data-zh="硬件" data-en="Hardware">硬件</span><br>
+                <span data-zh="嵌入式" data-en="Embedded">嵌入式</span><span class="gradient-text animated-gradient-text" data-zh="硬件" data-en="Hardware">硬件</span><br>
                 <span data-zh="设计工程师" data-en="Design Engineer">设计工程师</span>
             </h1>
             <p class="hero-subtitle body-lg" data-zh="专注于嵌入式硬件系统设计，精通原理图与PCB设计、嵌入式固件开发、信号采集与处理。两次研电赛参赛经历，获国家三等奖。" data-en="Focused on embedded hardware system design, proficient in schematic and PCB design, embedded firmware development, signal acquisition and processing. Two EDC competition experiences, won national third prize.">
                 专注于嵌入式硬件系统设计，精通原理图与PCB设计、嵌入式固件开发、信号采集与处理。两次研电赛参赛经历，获国家三等奖。
             </p>
             <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">
+                <a href="#projects" class="btn btn-primary magnetic-btn">
                     <span data-zh="查看作品" data-en="View Projects">查看作品</span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-                <a href="#contact" class="btn btn-secondary" data-zh="联系方式" data-en="Contact">联系方式</a>
+                <a href="#contact" class="btn btn-secondary magnetic-btn" data-zh="联系方式" data-en="Contact">联系方式</a>
             </div>
         </div>
     </section>
@@ -1533,7 +1913,7 @@
             </p>
 
             <div class="projects-grid">
-                <div class="project-card fade-in" onclick="openModal(0)">
+                <div class="project-card fade-in tilt-card" onclick="openModal(0)">
                     <div class="project-image project-gradient-1">
                         <div class="project-icon">🩸</div>
                     </div>
@@ -1556,7 +1936,7 @@
                     </div>
                 </div>
 
-                <div class="project-card fade-in" onclick="openModal(1)">
+                <div class="project-card fade-in tilt-card" onclick="openModal(1)">
                     <div class="project-image project-gradient-2">
                         <div class="project-icon">📱</div>
                     </div>
@@ -1578,7 +1958,7 @@
                     </div>
                 </div>
 
-                <div class="project-card fade-in" onclick="openModal(2)">
+                <div class="project-card fade-in tilt-card" onclick="openModal(2)">
                     <div class="project-image project-gradient-3">
                         <div class="project-icon">⚡</div>
                     </div>
@@ -1601,7 +1981,7 @@
                     </div>
                 </div>
 
-                <div class="project-card fade-in" onclick="openModal(3)">
+                <div class="project-card fade-in tilt-card" onclick="openModal(3)">
                     <div class="project-image project-gradient-4">
                         <div class="project-icon">🎨</div>
                     </div>
@@ -1683,7 +2063,7 @@
                 无论是实习机会、技术咨询还是学术交流，都欢迎随时联系我。
             </p>
             <p class="body fade-in" style="margin-bottom: 32px;"><span data-zh="微信" data-en="WeChat">微信</span>：Rose005x | <span data-zh="邮箱" data-en="Email">邮箱</span>：3052828531@qq.com | <span data-zh="现居住地" data-en="Location">现居住地</span>：<span data-zh="成都市双流区" data-en="Shuangliu, Chengdu">成都市双流区</span></p>
-            <a href="mailto:3052828531@qq.com" class="btn btn-primary fade-in">
+            <a href="mailto:3052828531@qq.com" class="btn btn-primary fade-in magnetic-btn">
                 <span data-zh="发送邮件" data-en="Send Email">发送邮件</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2225,7 +2605,321 @@
             }
         });
 
-        console.log('🚀 Portfolio loaded successfully!');
+        // ==================== Particle Background ====================
+        const particleCanvas = document.getElementById('particleCanvas');
+        const ctx = particleCanvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            particleCanvas.width = window.innerWidth;
+            particleCanvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * particleCanvas.width;
+                this.y = Math.random() * particleCanvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Mouse interaction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    this.x -= dx * force * 0.02;
+                    this.y -= dy * force * 0.02;
+                }
+
+                // Wrap around
+                if (this.x < 0) this.x = particleCanvas.width;
+                if (this.x > particleCanvas.width) this.x = 0;
+                if (this.y < 0) this.y = particleCanvas.height;
+                if (this.y > particleCanvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(94, 106, 210, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        const particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        const opacity = (1 - distance / 150) * 0.2;
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(94, 106, 210, ${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // Track mouse for particles
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // ==================== Scroll Indicator ====================
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                scrollIndicator.classList.remove('visible');
+            } else {
+                scrollIndicator.classList.add('visible');
+            }
+        });
+
+        // Show scroll indicator after loading
+        setTimeout(() => {
+            scrollIndicator.classList.add('visible');
+        }, 3000);
+
+        // ==================== GSAP Animations ====================
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero text animation
+        gsap.from('.hero-title', {
+            y: 80,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: 2.2
+        });
+
+        gsap.from('.hero-subtitle', {
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            delay: 2.5
+        });
+
+        gsap.from('.hero-cta', {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            delay: 2.8
+        });
+
+        // Stats counter animation
+        gsap.from('.stat-item', {
+            scrollTrigger: {
+                trigger: '.stats',
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            y: 60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        // About section animations
+        gsap.from('.about-image', {
+            scrollTrigger: {
+                trigger: '.about',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: -80,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        gsap.from('.about-content', {
+            scrollTrigger: {
+                trigger: '.about',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            x: 80,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            delay: 0.2,
+            clearProps: 'all'
+        });
+
+        // Skills animation
+        gsap.from('.skill-tag', {
+            scrollTrigger: {
+                trigger: '.skills-list',
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        // Project cards animation
+        gsap.from('.project-card', {
+            scrollTrigger: {
+                trigger: '.projects-grid',
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            y: 60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        // Timeline animation
+        gsap.from('.timeline-item', {
+            scrollTrigger: {
+                trigger: '.timeline',
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            },
+            x: -60,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.3,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        // Contact section animation
+        gsap.from('.contact-content', {
+            scrollTrigger: {
+                trigger: '.contact',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+
+        // Magnetic button effect
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+
+        // Tilt card effect
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+
+                const rotateX = (y - 0.5) * 10;
+                const rotateY = (x - 0.5) * -10;
+
+                gsap.to(card, {
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.5,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Morphing background animation
+        gsap.to('.morph-bg', {
+            x: 'random(-100, 100)',
+            y: 'random(-100, 100)',
+            duration: 8,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true
+        });
+
+        console.log('🚀 Portfolio Motion Edition loaded successfully!');
     </script>
 </body>
 </html>
