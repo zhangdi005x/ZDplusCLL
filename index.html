@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -272,9 +273,6 @@
             font-weight: 500;
             color: var(--ink-muted);
             margin-bottom: 32px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
         }
 
         .hero-label .dot {
@@ -292,9 +290,6 @@
 
         .hero-title {
             margin-bottom: 24px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
         .hero-title .gradient-text {
@@ -308,17 +303,11 @@
             max-width: 600px;
             color: var(--ink-muted);
             margin-bottom: 48px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.4s forwards;
         }
 
         .hero-cta {
             display: flex;
             gap: 16px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease 0.6s forwards;
         }
 
         @keyframes fadeInUp {
@@ -1394,18 +1383,6 @@
             opacity: 1;
         }
 
-        /* Stagger Animation */
-        .stagger-item {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .stagger-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Card Tilt Effect */
         .tilt-card {
             transform-style: preserve-3d;
@@ -1416,186 +1393,11 @@
             transform: rotateY(5deg) rotateX(5deg) scale(1.02);
         }
 
-        /* Gradient Border Animation */
-        .gradient-border {
-            position: relative;
-            background: var(--surface-2);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            padding: 2px;
-            background: linear-gradient(135deg, #5e6ad2, #828fff, #667eea, #764ba2);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            border-radius: 16px;
-            animation: gradientRotate 3s linear infinite;
-            background-size: 200% 200%;
-        }
-
-        @keyframes gradientRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* Scale In Animation */
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Slide In Animations */
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .slide-left.visible,
-        .slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Blur In Animation */
-        .blur-in {
-            opacity: 0;
-            filter: blur(10px);
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .blur-in.visible {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0);
-        }
-
-        /* Morphing Background */
-        .morph-bg {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: morph 8s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes morph {
-            0%, 100% {
-                border-radius: 50% 50% 50% 50%;
-                transform: rotate(0deg) scale(1);
-            }
-            25% {
-                border-radius: 50% 30% 50% 30%;
-                transform: rotate(90deg) scale(1.1);
-            }
-            50% {
-                border-radius: 30% 50% 30% 50%;
-                transform: rotate(180deg) scale(1);
-            }
-            75% {
-                border-radius: 50% 50% 30% 30%;
-                transform: rotate(270deg) scale(1.1);
-            }
-        }
-
-        /* Smooth Counter */
-        .counter-value {
-            font-variant-numeric: tabular-nums;
-        }
-
-        /* Glitch Effect */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-        }
-
-        .glitch:hover::before {
-            animation: glitch1 0.3s linear;
-            color: #828fff;
-            opacity: 0.8;
-        }
-
-        .glitch:hover::after {
-            animation: glitch2 0.3s linear;
-            color: #667eea;
-            opacity: 0.8;
-        }
-
-        @keyframes glitch1 {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(3px, -3px); }
-            60% { transform: translate(-3px, -3px); }
-            80% { transform: translate(3px, 3px); }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes glitch2 {
-            0% { transform: translate(0); }
-            20% { transform: translate(3px, -3px); }
-            40% { transform: translate(-3px, 3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(-3px, -3px); }
-            100% { transform: translate(0); }
-        }
-
         /* Smooth Section Transitions */
         section {
             position: relative;
             overflow: hidden;
             z-index: 1;
-        }
-
-        /* Enhanced Hover Cards */
-        .hover-card {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .hover-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 32px 64px rgba(94, 106, 210, 0.2);
         }
 
         /* Animated Gradient Text */
@@ -1612,17 +1414,6 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* Line Draw Animation */
-        .line-draw {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            transition: stroke-dashoffset 2s ease;
-        }
-
-        .line-draw.visible {
-            stroke-dashoffset: 0;
         }
 
         /* Enhanced Loading Screen */
@@ -1678,16 +1469,6 @@
         @keyframes scrollWheel {
             0% { opacity: 1; transform: translateX(-50%) translateY(0); }
             100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
-        }
-
-        /* Page Transition */
-        .page-transition {
-            position: fixed;
-            inset: 0;
-            background: var(--primary);
-            z-index: 10001;
-            transform: scaleY(0);
-            transform-origin: bottom;
         }
 
         /* Enhanced Stats Counter */
@@ -1861,7 +1642,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image fade-in">
-                    <img src="小主2.jpg" alt="张祥超" class="about-photo">
+                    <img src="photo.jpg" alt="张祥超" class="about-photo">
                 </div>
                 <div class="about-content">
                     <p class="caption section-label fade-in" data-zh="关于我" data-en="About Me">关于我</p>
@@ -2132,26 +1913,38 @@
         // Apply language on page load
         document.addEventListener('DOMContentLoaded', applyLanguage);
 
-        // ==================== Scroll Progress ====================
+        // ==================== Consolidated Scroll Handler ====================
         const scrollProgress = document.getElementById('scrollProgress');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
-
-        // ==================== Navbar Scroll Effect ====================
         const navbar = document.getElementById('navbar');
+        const scrollIndicator = document.getElementById('scrollIndicator');
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+        function handleScroll() {
+            const scrollY = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollY / docHeight) * 100;
+
+            // Scroll progress bar
+            scrollProgress.style.width = scrollPercent + '%';
+
+            // Navbar effect
+            if (scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-        });
+
+            // Scroll indicator
+            if (scrollY > 100) {
+                scrollIndicator.classList.remove('visible');
+            } else {
+                scrollIndicator.classList.add('visible');
+            }
+
+            // Active nav link
+            updateActiveNav();
+        }
+
+        window.addEventListener('scroll', handleScroll);
 
         // ==================== Custom Cursor ====================
         const cursorDot = document.getElementById('cursorDot');
@@ -2264,11 +2057,15 @@
         function startCountAnimation() {
             const statNumbers = document.querySelectorAll('.stat-number');
             statNumbers.forEach(stat => {
+                const accentSpan = stat.querySelector('.accent');
+                if (!accentSpan) return;
+
                 const text = stat.textContent;
                 const match = text.match(/(\d+)/);
                 if (match) {
                     const target = parseInt(match[0]);
-                    const suffix = text.replace(match[0], '').trim();
+                    const zhText = accentSpan.getAttribute('data-zh') || '';
+                    const enText = accentSpan.getAttribute('data-en') || '';
                     let current = 0;
                     const increment = target / 60;
                     const timer = setInterval(() => {
@@ -2277,7 +2074,8 @@
                             current = target;
                             clearInterval(timer);
                         }
-                        stat.innerHTML = Math.floor(current) + '<span class="accent">' + suffix + '</span>';
+                        const suffix = currentLang === 'zh' ? zhText : enText;
+                        stat.innerHTML = Math.floor(current) + '<span class="accent" data-zh="' + zhText + '" data-en="' + enText + '">' + suffix + '</span>';
                     }, 16);
                 }
             });
@@ -2305,12 +2103,12 @@
 
             // Skill data (0-100)
             const skills = [
-                { label: '原理图设计', value: 90 },
-                { label: 'PCB设计', value: 85 },
-                { label: 'C语言', value: 80 },
-                { label: 'Python', value: 75 },
-                { label: '硬件调试', value: 88 },
-                { label: '信号处理', value: 78 }
+                { label_zh: '原理图设计', label_en: 'Schematic', value: 90 },
+                { label_zh: 'PCB设计', label_en: 'PCB Design', value: 85 },
+                { label_zh: 'C语言', label_en: 'C Language', value: 80 },
+                { label_zh: 'Python', label_en: 'Python', value: 75 },
+                { label_zh: '硬件调试', label_en: 'Debugging', value: 88 },
+                { label_zh: '信号处理', label_en: 'Signal Proc.', value: 78 }
             ];
 
             const totalSkills = skills.length;
@@ -2402,7 +2200,7 @@
                 ctx.fillStyle = '#8a8f98';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText(skill.label, labelX, labelY);
+                ctx.fillText(currentLang === 'zh' ? skill.label_zh : skill.label_en, labelX, labelY);
             });
         }
 
@@ -2486,53 +2284,71 @@
             });
         }
 
-        window.addEventListener('scroll', updateActiveNav);
-
         // ==================== Project Modal ====================
         const projectsData = [
             {
                 icon: '🩸',
                 gradient: 'project-gradient-1',
                 year: '2025',
-                type: '兆易创新全开放命题 · 国家三等奖',
-                title: '无创血糖检测轻量化设备（第二十一届研电赛）',
-                description: '主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成系统硬件架构设计、双传感器（MAX30102 PPG + ADS1292 ECG）采集系统的原理图设计和PCB布局布线。',
-                role: '硬件设计负责人',
-                result: '国家三等奖',
-                tech: ['GD32F303', 'MAX30102', 'ADS1292', 'SPI/I2C', 'PCB设计']
+                type_zh: '兆易创新全开放命题 · 国家三等奖',
+                type_en: 'GigaDevice Open Topic · National 3rd Prize',
+                title_zh: '无创血糖检测轻量化设备（第二十一届研电赛）',
+                title_en: 'Non-invasive Blood Glucose Detection Device (21st EDC)',
+                description_zh: '主导设计基于GD32F303的无创血糖检测轻量化设备，实现PPG与ECG信号同步采集。独立完成系统硬件架构设计、双传感器（MAX30102 PPG + ADS1292 ECG）采集系统的原理图设计和PCB布局布线。',
+                description_en: 'Led the design of a lightweight non-invasive blood glucose detection device based on GD32F303, achieving synchronous PPG and ECG signal acquisition. Independently completed system hardware architecture design, dual-sensor acquisition system schematic design and PCB layout.',
+                role_zh: '硬件设计负责人',
+                role_en: 'Hardware Design Lead',
+                result_zh: '国家三等奖',
+                result_en: 'National 3rd Prize',
+                tech: ['GD32F303', 'MAX30102', 'ADS1292', 'SPI/I2C', 'PCB Design']
             },
             {
                 icon: '📱',
                 gradient: 'project-gradient-2',
                 year: '2024',
-                type: '小米手环企业命题 · 硬件设计',
-                title: '小米手环硬件设计（第二十届研电赛）',
-                description: '研究生电子设计竞赛"小米手环"企业命题参赛项目。独立完成原理图与PCB设计，掌握从原理图设计、元件选型到PCB布局布线的全流程硬件设计能力。',
-                role: '硬件设计工程师',
-                result: '参赛作品',
-                tech: ['原理图设计', 'PCB设计', '嘉立创EDA', '信号完整性']
+                type_zh: '小米手环企业命题 · 硬件设计',
+                type_en: 'Mi Band Enterprise Topic · Hardware Design',
+                title_zh: '小米手环硬件设计（第二十届研电赛）',
+                title_en: 'Mi Band Hardware Design (20th EDC)',
+                description_zh: '研究生电子设计竞赛"小米手环"企业命题参赛项目。独立完成原理图与PCB设计，掌握从原理图设计、元件选型到PCB布局布线的全流程硬件设计能力。',
+                description_en: 'Postgraduate Electronic Design Contest Mi Band enterprise topic competition project. Independently completed schematic and PCB design, mastered the whole process hardware design ability.',
+                role_zh: '硬件设计工程师',
+                role_en: 'Hardware Design Engineer',
+                result_zh: '参赛作品',
+                result_en: 'Competition Entry',
+                tech: ['Schematic', 'PCB Design', 'JLCEDA', 'Signal Integrity']
             },
             {
                 icon: '⚡',
                 gradient: 'project-gradient-3',
                 year: '2025',
-                type: '嵌入式系统 · 信号处理',
-                title: 'PPG/ECG信号同步采集系统',
-                description: '基于GD32F303 MCU的双传感器采集系统，通过3.3V统一供电，为ADS1292的MISO开漏输出配置4.7kΩ上拉电阻，合理分配GPIO资源，实现高速SPI和I2C双总线通信。解决MISO缺上拉、PA6引脚短路等硬件故障，系统连续运行24小时无异常。',
-                role: '系统架构师',
-                result: '24小时稳定运行',
-                tech: ['GD32F303', 'SPI通信', 'I2C通信', '故障排查', '硬件焊接']
+                type_zh: '嵌入式系统 · 信号处理',
+                type_en: 'Embedded System · Signal Processing',
+                title_zh: 'PPG/ECG信号同步采集系统',
+                title_en: 'PPG/ECG Synchronous Acquisition System',
+                description_zh: '基于GD32F303 MCU的双传感器采集系统，通过3.3V统一供电，为ADS1292的MISO开漏输出配置4.7kΩ上拉电阻，合理分配GPIO资源，实现高速SPI和I2C双总线通信。解决MISO缺上拉、PA6引脚短路等硬件故障，系统连续运行24小时无异常。',
+                description_en: 'Dual-sensor acquisition system based on GD32F303 MCU, with 3.3V unified power supply, 4.7kΩ pull-up resistor for ADS1292 MISO open-drain output, achieving high-speed SPI and I2C dual-bus communication. System ran continuously for 24 hours without abnormality.',
+                role_zh: '系统架构师',
+                role_en: 'System Architect',
+                result_zh: '24小时稳定运行',
+                result_en: '24h Stable Operation',
+                tech: ['GD32F303', 'SPI', 'I2C', 'Troubleshooting', 'Soldering']
             },
             {
                 icon: '🎨',
                 gradient: 'project-gradient-4',
                 year: '2025',
-                type: '上位机 · 数据处理',
-                title: 'PPG信号采集与血糖预测系统',
-                description: '完整的PPG信号采集上位机与基于ResNet深度学习的无创血糖预测系统。支持实时波形显示、信号滤波、特征提取，结合Python与MATLAB进行数据仿真分析。',
-                role: '全栈开发',
-                result: '完整系统',
-                tech: ['Python', 'MATLAB', 'ResNet', 'PyQt', '数据可视化']
+                type_zh: '上位机 · 数据处理',
+                type_en: 'Host Software · Data Processing',
+                title_zh: 'PPG信号采集与血糖预测系统',
+                title_en: 'PPG Signal Acquisition & Blood Glucose Prediction System',
+                description_zh: '完整的PPG信号采集上位机与基于ResNet深度学习的无创血糖预测系统。支持实时波形显示、信号滤波、特征提取，结合Python与MATLAB进行数据仿真分析。',
+                description_en: 'Complete PPG signal acquisition host software and non-invasive blood glucose prediction system based on ResNet deep learning. Supports real-time waveform display, signal filtering, feature extraction.',
+                role_zh: '全栈开发',
+                role_en: 'Full-stack Developer',
+                result_zh: '完整系统',
+                result_en: 'Complete System',
+                tech: ['Python', 'MATLAB', 'ResNet', 'PyQt', 'Visualization']
             }
         ];
 
@@ -2551,11 +2367,11 @@
             modalImage.className = 'modal-image ' + project.gradient;
             modalImage.innerHTML = '<div class="project-icon">' + project.icon + '</div>';
             modalYear.textContent = project.year;
-            modalType.textContent = project.type;
-            modalTitle.textContent = project.title;
-            modalDescription.textContent = project.description;
-            modalRole.textContent = project.role;
-            modalResult.textContent = project.result;
+            modalType.textContent = currentLang === 'zh' ? project.type_zh : project.type_en;
+            modalTitle.textContent = currentLang === 'zh' ? project.title_zh : project.title_en;
+            modalDescription.textContent = currentLang === 'zh' ? project.description_zh : project.description_en;
+            modalRole.textContent = currentLang === 'zh' ? project.role_zh : project.role_en;
+            modalResult.textContent = currentLang === 'zh' ? project.result_zh : project.result_en;
 
             modalTech.innerHTML = project.tech.map(t => '<span class="tech-tag">' + t + '</span>').join('');
 
@@ -2593,17 +2409,6 @@
                 glowEffect.style.top = e.clientY + 'px';
             });
         }
-
-        // ==================== Enhanced Parallax ====================
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const hero = document.querySelector('.hero');
-
-            if (scrolled < window.innerHeight) {
-                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-                hero.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
-            }
-        });
 
         // ==================== Particle Background ====================
         const particleCanvas = document.getElementById('particleCanvas');
@@ -2690,7 +2495,16 @@
             }
         }
 
+        let isTabVisible = true;
+
+        document.addEventListener('visibilitychange', () => {
+            isTabVisible = !document.hidden;
+            if (isTabVisible) animateParticles();
+        });
+
         function animateParticles() {
+            if (!isTabVisible) return;
+
             ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
 
             particles.forEach(particle => {
@@ -2711,16 +2525,6 @@
         });
 
         // ==================== Scroll Indicator ====================
-        const scrollIndicator = document.getElementById('scrollIndicator');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                scrollIndicator.classList.remove('visible');
-            } else {
-                scrollIndicator.classList.add('visible');
-            }
-        });
-
         // Show scroll indicator after loading
         setTimeout(() => {
             scrollIndicator.classList.add('visible');
